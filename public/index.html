@@ -1,0 +1,62 @@
+<style>
+    body {
+        background-color: #00030f;
+        color: white;
+    }
+
+    .center {
+        text-align: center;
+    }
+
+    #title {
+        width: 35%;
+        pointer-events: none;
+    }
+
+    #search > input {
+        width: 500px;
+        font-size: 16px;
+        padding: 12px;
+        background-color: #00030f;
+        border-color: #191b24;
+        border-radius: 27px;
+        border-style: solid;
+        color: white;
+    }
+    #search > input:focus {
+        background-color: #0e111f;
+    }
+
+    #searchType {
+        padding: 12px;
+        height: 50px;
+        width: 150px;
+        background-color: #00030f;
+        border-color: #191b24;
+        border-radius: 12px;
+        border-style: solid;
+        color: white;
+    }
+    #searchType:focus {
+        background-color: #0e111f;
+    }
+</style>
+
+<div class="squilt">
+    <div class="center">
+        <img src="public/images/title.png" id="title">
+        <form>
+            <div id="search">
+                <input name="q" type="text" id="s" placeholder="Search" autocomplete="off" />
+            </div>
+            <br><br>
+            <div id="dropdown">
+                <select name="searchType" id="searchType">
+                    <option value="safe">Safe Search</option>
+                    <option value="normal">Normal</option>
+                    <option value="tor">Tor Search</option>
+                </select>
+            </div>
+        </form>
+    </div>    
+</div>

