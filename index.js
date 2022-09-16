@@ -3,7 +3,13 @@ var fs = require('fs');
 const url = require("url");
 const axios = require('axios');
 
-css = "* {background-color: #00030f;color: white;} a{color:#ccc;}a:link{color:#ccc;} h3 {color: white}"
+async function resultsHTML(callback) {
+    return fs.readFile('public/service.html', 'utf8', callback);
+};
+
+injectedHTML = "";
+
+fs.readFile('public/service.html', 'utf8', (function (err, data) {injectedHTML = data; console.log(injectedHTML)}));
 
 domain = "";
 
@@ -16,7 +22,7 @@ async function httpGetAsync(theUrl, callback) {
     console.log(theUrl);
     const res = await axios.get(theUrl).then(function (response) {
         callback(response);
-    });
+    }).catch(function (error) {console.log(error)});
 }
 
 function validateRequest (req) {
@@ -49,11 +55,21 @@ http.createServer((req, res)=>{
 
     search = parameters.q;
 
+    thisUrl = parameters.url;
+
     searchType = parameters.searchType;
 
     console.log(path);
 
+    if (thisUrl != undefined) {
+        responseData = `${httpGetAsync(thisUrl, (function(response){
+            res.write(`${response.data}${injectedHTML}`);
+            res.end();
+        }))}`;
+        
 
+        return 0;
+    }
 
     if (search != undefined) {
 
@@ -63,8 +79,7 @@ http.createServer((req, res)=>{
 
         } else {
             responseData = `${httpGetAsync(`https://www.ask.com/web?q=${search}&ad=dirN&o=0&ueid=90d5946d-cfd2-4228-9f42-7fad873b8488`, (function(response){
-                console.log(response.data)
-                res.write(`${response.data}<style>${css}</style>`);
+                res.write(`${response.data}${injectedHTML}`);
                 res.end();
             }))}`;
         }
