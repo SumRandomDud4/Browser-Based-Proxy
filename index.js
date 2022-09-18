@@ -1,5 +1,5 @@
 const fs = require('fs');
-const http = require('https');
+const http = require('http');
 const url = require('url');
 const port = 24425;
 
@@ -9,7 +9,7 @@ const server = http.createServer((req, res) => {
 
     console.log(path);
 
-    if (path === "") { // Render main page
+    if (path == "") { // Render main page
         fs.readFile('public/index.html', null, function (error, data) {
             if (error) {
                 res.writeHead(404);
@@ -19,7 +19,7 @@ const server = http.createServer((req, res) => {
             }
             res.end();
         });
-    } else if (path === "favicon.ico") { // Render Favicon
+    } else if (path == "favicon.ico") { // Render Favicon
         fs.readFile('public/images/favicon.png', null, function (error, data) {
             if (error) {
                 res.writeHead(404);
@@ -31,7 +31,7 @@ const server = http.createServer((req, res) => {
         });
     } else {
         if (path.startsWith("public/") && fs.existsSync(path)) { // Send all other pages
-            fs.readFile('public/images/favicon.png', null, function (error, data) {
+            fs.readFile(path, null, function (error, data) {
                 if (error) {
                     res.writeHead(404);
                     res.write('File not found');
