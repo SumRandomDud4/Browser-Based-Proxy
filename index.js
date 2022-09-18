@@ -5,6 +5,11 @@ const port = 24425;
 
 // Create an HTTP server
 const server = http.createServer((req, res) => {
+
+    if (req.length > 1024) {
+        return;
+    }
+
     let path = req.url.substring(1);
 
     console.log(path);
